@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
 
+import com.omnitools.omniTools.compat.CompatBootstrap;
 import com.omnitools.omniTools.core.ModItems;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -18,5 +19,6 @@ public class omniTools {
     public omniTools(IEventBus modEventBus, ModContainer modContainer) {
         LOGGER.info("OmniTools mod is loading...");
         ModItems.register(modEventBus);
+        CompatBootstrap.registerHandlers();
     }
 }
