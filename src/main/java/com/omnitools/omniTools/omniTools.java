@@ -6,6 +6,7 @@ import com.mojang.logging.LogUtils;
 
 import com.omnitools.omniTools.compat.CompatBootstrap;
 import com.omnitools.omniTools.core.ModItems;
+import com.omnitools.omniTools.network.NetworkHandler;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
@@ -19,6 +20,7 @@ public class omniTools {
     public omniTools(IEventBus modEventBus, ModContainer modContainer) {
         LOGGER.info("OmniTools mod is loading...");
         ModItems.register(modEventBus);
+        NetworkHandler.register(modEventBus);
         CompatBootstrap.registerHandlers();
     }
 }

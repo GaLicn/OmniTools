@@ -1,5 +1,7 @@
 package com.omnitools.omniTools.api;
 
+import com.omnitools.omniTools.core.ToolMode;
+import com.omnitools.omniTools.core.OmniToolItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
@@ -39,5 +41,9 @@ public class WrenchContext {
 
     public ItemStack getStack() {
         return stack;
+    }
+
+    public ToolMode getCurrentMode() {
+        return OmniToolItem.getMode(stack);
     }
 }

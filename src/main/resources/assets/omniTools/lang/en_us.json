@@ -1,3 +1,5 @@
 {
-  "item.omnitools.omni_wrench": "Omni Wrench"
+  "item.omnitools.omni_wrench": "Omni Wrench",
+  "key.omnitools.cycle_mode": "Cycle Tool Mode",
+  "key.categories.gameplay": "Gameplay"
 }

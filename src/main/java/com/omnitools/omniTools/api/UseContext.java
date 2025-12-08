@@ -1,5 +1,7 @@
 package com.omnitools.omniTools.api;
 
+import com.omnitools.omniTools.core.ToolMode;
+import com.omnitools.omniTools.core.OmniToolItem;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -32,5 +34,9 @@ public class UseContext {
 
     public ItemStack getStack() {
         return stack;
+    }
+
+    public ToolMode getCurrentMode() {
+        return OmniToolItem.getMode(stack);
     }
 }
