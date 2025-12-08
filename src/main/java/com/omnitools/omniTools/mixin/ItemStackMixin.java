@@ -37,7 +37,14 @@ public abstract class ItemStackMixin {
     @Unique
     private static boolean omnitools$isWrenchTag(TagKey<Item> tag) {
         ResourceLocation id = tag.location();
-        // 只判断 path 是否为 tools/wrench，以兼容 c:tools/wrench、forge:tools/wrench 等不同命名空间
-        return "tools/wrench".equals(id.getPath());
+        // 1) 通用扳手标签：c:tools/wrench、forge:tools/wrench 等（只判断 path）
+        if ("tools/wrench".equals(id.getPath())) {
+            return true;
+        }
+        // 2) Mekanism 的配置器标签：mekanism:configurators，同样视为扳手类工具
+        if ("mekanism".equals(id.getNamespace()) && "configurators".equals(id.getPath())) {
+            return true;
+        }
+        return false;
     }
 }
