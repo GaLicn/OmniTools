@@ -8,6 +8,7 @@ import com.omnitools.omniTools.compat.extendedae.ExtendedAERenamePreHandler;
 import com.omnitools.omniTools.compat.immersiveengineering.IEWrenchHandler;
 import com.omnitools.omniTools.compat.mebeamformer.MEBeamFormerUseHandler;
 import com.omnitools.omniTools.compat.mebeamformer.MEBeamFormerWrenchHandler;
+import com.omnitools.omniTools.compat.mekanism.MekanismTransmitterWrenchHandler;
 import com.omnitools.omniTools.compat.powah.PowahLinkWrenchHandler;
 import com.omnitools.omniTools.core.UseHandlerRegistry;
 import com.omnitools.omniTools.core.WrenchHandlerRegistry;
@@ -19,6 +20,9 @@ public class CompatBootstrap {
     public static void registerHandlers() {
         if (ModList.get().isLoaded("immersiveengineering")) {
             WrenchHandlerRegistry.register(new IEWrenchHandler());
+        }
+        if (ModList.get().isLoaded("mekanism")) {
+            WrenchHandlerRegistry.register(new MekanismTransmitterWrenchHandler());
         }
         if (ModList.get().isLoaded("ae2")) {
             UseHandlerRegistry.register(new AE2RenameUseHandler());

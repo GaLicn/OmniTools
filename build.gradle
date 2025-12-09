@@ -160,7 +160,8 @@ dependencies {
     implementation "curse.maven:powah-rearchitected-633483:7269384"
     //纠缠方块
     implementation "curse.maven:entangled-301034:5885929"
-
+    //ender io
+    implementation "curse.maven:ender-io-64578:7204349"
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
