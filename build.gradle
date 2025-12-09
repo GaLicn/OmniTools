@@ -142,6 +142,10 @@ dependencies {
     implementation "curse.maven:glodium-957920:5821676"
     implementation "curse.maven:cloth-config-348521:5729127"
 
+    //纠缠方块依赖
+    implementation "curse.maven:supermartijn642s-core-lib-454372:6076757"
+    implementation "curse.maven:supermartijn642s-config-lib-438332:5546996"
+
     //PIPEZ
     implementation "curse.maven:pipez-443900:5656728"
     //沉浸工程
@@ -152,6 +156,9 @@ dependencies {
     implementation "curse.maven:me-beam-former-1351545:7267509"
     //powah
     implementation "curse.maven:powah-rearchitected-633483:7269384"
+    //纠缠方块
+    implementation "curse.maven:entangled-301034:5885929"
+
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

@@ -16,11 +16,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 
-/**
- * 适配 me_beam_former 的 LaserBindingTool：
- * 通过反射直接调用原模组的 LaserBindingTool.useOn，
- * 将 omni_wrench 的 NBT 结构与行为做到与原工具一致。
- */
 public class MEBeamFormerWrenchHandler implements IWrenchHandler {
     private static LaserBindingTool CACHED_TOOL = null;
 

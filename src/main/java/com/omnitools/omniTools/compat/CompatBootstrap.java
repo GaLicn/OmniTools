@@ -1,5 +1,7 @@
 package com.omnitools.omniTools.compat;
 
+import com.omnitools.omniTools.compat.entangled.EntangledBinderUseHandler;
+import com.omnitools.omniTools.compat.entangled.EntangledBinderWrenchHandler;
 import com.omnitools.omniTools.compat.immersiveengineering.IEWrenchHandler;
 import com.omnitools.omniTools.compat.mebeamformer.MEBeamFormerUseHandler;
 import com.omnitools.omniTools.compat.mebeamformer.MEBeamFormerWrenchHandler;
@@ -19,6 +21,10 @@ public class CompatBootstrap {
         }
         if (ModList.get().isLoaded("powah")) {
             WrenchHandlerRegistry.register(new PowahLinkWrenchHandler());
+        }
+        if (ModList.get().isLoaded("entangled")) {
+            WrenchHandlerRegistry.register(new EntangledBinderWrenchHandler());
+            UseHandlerRegistry.register(new EntangledBinderUseHandler());
         }
     }
 }
