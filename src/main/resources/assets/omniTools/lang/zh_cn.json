@@ -1,5 +1,6 @@
 {
-  "itemGroup.omnitools": "OmniTools",
+  "item.omnitools.omni_wrench": "全能扳手",
+  "itemGroup.omnitools": "全能工具",
   "key.categories.omnitools": "OmniTools 控制",
   "key.omnitools.cycle_mode": "Omni 扳手：切换模式",
   "toolmode.omnitools.wrench": "普通扳手模式",
