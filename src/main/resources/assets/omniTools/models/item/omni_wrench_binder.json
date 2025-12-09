@@ -2,5 +2,11 @@
   "parent": "item/generated",
   "textures": {
     "layer0": "omnitools:item/omni_wrench_binder"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [48, 76, 0],
+      "translation": [1.75, 5.75, 2.75]
+    }
   }
 }
