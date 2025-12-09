@@ -25,3 +25,4 @@ run-data
 
 repo
 othermods
+/src/generated/resources/.cache/

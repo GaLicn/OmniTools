@@ -61,8 +61,8 @@ public class ClientEvents {
         CYCLE_MODE_KEYBIND = new KeyMapping(
                 "key.omnitools.cycle_mode",
                 InputConstants.Type.KEYSYM,
-                GLFW.GLFW_KEY_U,
-                "key.categories.gameplay"
+                GLFW.GLFW_KEY_LEFT_ALT,
+                "key.categories.omnitools"
         );
         event.register(CYCLE_MODE_KEYBIND);
     }
@@ -85,10 +85,13 @@ public class ClientEvents {
                         
                         // 发送网络包到服务器同步模式
                         PacketDistributor.sendToServer(new SyncToolModePacket(newMode.getId()));
-                        
-                        // 通知玩家模式已切换
+
+                        // 通知玩家模式已切换（整句使用翻译键，模式名作为参数）
                         player.displayClientMessage(
-                            Component.literal("§6[OmniTool] §rMode switched to: §e" + newMode.getDisplayName()),
+                            Component.translatable(
+                                    "message.omnitools.mode_switched",
+                                    Component.translatable(newMode.getTranslationKey())
+                            ),
                             true
                         );
                     }

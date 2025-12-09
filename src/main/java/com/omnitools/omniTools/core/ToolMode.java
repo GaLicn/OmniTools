@@ -5,24 +5,24 @@ package com.omnitools.omniTools.core;
  * 后续可以轻松扩展添加新模式
  */
 public enum ToolMode {
-    WRENCH("wrench", "普通扳手模式"),
-    LINK("link", "连接模式"),
-    RENAME("rename", "改名模式");
+    WRENCH("wrench", "toolmode.omnitools.wrench"),
+    LINK("link", "toolmode.omnitools.link"),
+    RENAME("rename", "toolmode.omnitools.rename");
 
     private final String id;
-    private final String displayName;
+    private final String translationKey;
 
-    ToolMode(String id, String displayName) {
+    ToolMode(String id, String translationKey) {
         this.id = id;
-        this.displayName = displayName;
+        this.translationKey = translationKey;
     }
 
     public String getId() {
         return id;
     }
 
-    public String getDisplayName() {
-        return displayName;
+    public String getTranslationKey() {
+        return translationKey;
     }
 
     public static ToolMode fromId(String id) {

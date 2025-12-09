@@ -5,7 +5,9 @@ import org.slf4j.Logger;
 import com.mojang.logging.LogUtils;
 
 import com.omnitools.omniTools.compat.CompatBootstrap;
+import com.omnitools.omniTools.core.ModCreativeTabs;
 import com.omnitools.omniTools.core.ModItems;
+import com.omnitools.omniTools.data.OmniToolsDataGenerator;
 import com.omnitools.omniTools.network.NetworkHandler;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -20,7 +22,9 @@ public class omniTools {
     public omniTools(IEventBus modEventBus, ModContainer modContainer) {
         LOGGER.info("OmniTools mod is loading...");
         ModItems.register(modEventBus);
+        ModCreativeTabs.register(modEventBus);
         NetworkHandler.register(modEventBus);
         CompatBootstrap.registerHandlers();
+        modEventBus.addListener(OmniToolsDataGenerator::gatherData);
     }
 }

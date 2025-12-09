@@ -1,16 +1,21 @@
 package com.omnitools.omniTools.core;
 
+import java.util.List;
+
 import com.omnitools.omniTools.api.UseContext;
 import com.omnitools.omniTools.api.WrenchContext;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -76,6 +81,13 @@ public class OmniToolItem extends Item {
 
     private static boolean isRenameModeEnabled() {
         return ModList.get() != null && ModList.get().isLoaded("ae2");
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+        tooltip.add(Component.translatable("tooltip.omnitools.omni_wrench.main").withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("tooltip.omnitools.omni_wrench.controls").withStyle(ChatFormatting.DARK_GRAY));
+        super.appendHoverText(stack, context, tooltip, flag);
     }
 
     @Override
