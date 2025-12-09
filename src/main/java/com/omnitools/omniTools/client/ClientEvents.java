@@ -84,6 +84,13 @@ public class ClientEvents {
         }
     }
 
+
+
+
+
+
+
+    //纠缠方块模组的选择方块渲染
     @EventBusSubscriber(modid = "omnitools", value = Dist.CLIENT, bus = EventBusSubscriber.Bus.GAME)
     public static class HighlightEvents {
         @SubscribeEvent
