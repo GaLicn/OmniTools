@@ -1,7 +1,15 @@
 package com.omnitools.compat;
 
+import com.omnitools.compat.immersiveengineering.IEWrenchHandler;
+import com.omnitools.core.UseHandlerRegistry;
+import com.omnitools.core.WrenchHandlerRegistry;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.fml.ModList;
+
 public class CompatBootstrap {
     public static void registerHandlers() {
-        // Compat handlers for other mods will be ported here from the 1.21.1 NeoForge project.
+        if (ModList.get().isLoaded("immersiveengineering")) {
+            WrenchHandlerRegistry.register(new IEWrenchHandler());
+        }
     }
 }
