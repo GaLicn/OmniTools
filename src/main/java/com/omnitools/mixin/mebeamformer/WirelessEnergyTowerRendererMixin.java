@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Slice;
 /**
  * 我自己的模组，适配起来就是简单，就是爽哈哈
  */
-@Mixin(WirelessEnergyTowerRenderer.class)
+@Mixin(value = WirelessEnergyTowerRenderer.class,remap = false)
 public abstract class WirelessEnergyTowerRendererMixin {
 
     @ModifyVariable(

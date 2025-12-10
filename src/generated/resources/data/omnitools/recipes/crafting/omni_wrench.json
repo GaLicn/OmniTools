@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "minecraft:obsidian"
+    },
+    "b": {
+      "item": "minecraft:diamond"
+    },
+    "i": {
+      "item": "minecraft:netherite_ingot"
+    }
+  },
+  "pattern": [
+    " bi",
+    " ab",
+    "a  "
+  ],
+  "result": {
+    "item": "omnitools:omni_wrench"
+  },
+  "show_notification": true
+}
