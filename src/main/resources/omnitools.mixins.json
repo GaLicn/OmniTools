@@ -5,6 +5,10 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "omnitools.refmap.json",
   "mixins": [
+    "ae2.OmniToolItemAEMenuItemMixin",
+    "mebeamformer.WirelessEnergyTowerRendererMixin",
+    "powah.EnergizingOrbBlockMixin",
+    "powah.EnergizingRodRendererMixin"
   ],
   "client": [
   ],
