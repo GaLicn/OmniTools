@@ -4,7 +4,9 @@
   "package": "com.omnitools.mixin",
   "compatibilityLevel": "JAVA_8",
   "refmap": "omnitools.refmap.json",
+  "plugin": "com.omnitools.mixin.OmniToolsMixinPlugin",
   "mixins": [
+    "ItemStackMixin",
     "ae2.OmniToolItemAEMenuItemMixin",
     "mebeamformer.WirelessEnergyTowerRendererMixin",
     "powah.EnergizingOrbBlockMixin",
