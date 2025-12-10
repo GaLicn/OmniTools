@@ -198,6 +198,11 @@ dependencies {
     implementation fg.deobf("curse.maven:patchouli-306770:6164575")
     implementation fg.deobf("curse.maven:curios-309927:6418456")
 
+    //龙之研究
+    implementation fg.deobf("curse.maven:draconic-evolution-223565:6793843")
+    implementation fg.deobf("curse.maven:brandons-core-231382:5422013")
+    implementation fg.deobf("curse.maven:codechicken-lib-1-8-242818:5753868")
+
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html

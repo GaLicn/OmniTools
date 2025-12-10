@@ -30,11 +30,20 @@ public class BotaniaWandLinkWrenchHandler implements IWrenchHandler {
         if (level == null) {
             return false;
         }
+        ItemStack stack = context.getStack();
         BlockPos pos = context.getPos();
         BlockState state = level.getBlockState(pos);
         Block block = state.getBlock();
         if (block instanceof ForceRelayBlock) {
             return true;
+        }
+        Optional<BlockPos> boundPos = WandOfTheForestItem.getBindingAttempt(stack);
+        if (boundPos.isPresent()) {
+            BlockPos src = boundPos.get();
+            BlockEntity srcTile = level.getBlockEntity(src);
+            if (srcTile instanceof WandBindable) {
+                return true;
+            }
         }
         BlockEntity be = level.getBlockEntity(pos);
         return be instanceof WandBindable;
@@ -71,10 +80,6 @@ public class BotaniaWandLinkWrenchHandler implements IWrenchHandler {
             return InteractionResult.PASS;
         }
 
-        if (!(be instanceof WandBindable bindable)) {
-            return InteractionResult.PASS;
-        }
-
         Optional<BlockPos> boundPos = WandOfTheForestItem.getBindingAttempt(stack);
 
         // 先尝试完成一次绑定：手上已有选中的源方块，再对另一方块 SHIFT+右键
@@ -89,9 +94,13 @@ public class BotaniaWandLinkWrenchHandler implements IWrenchHandler {
                         WandOfTheForestItem.doParticleBeamWithOffset(level, src, dest);
                         WandOfTheForestItem.setBindingAttempt(stack, Bound.UNBOUND_POS);
                     }
-                    return InteractionResult.SUCCESS;
                 }
             }
+            return InteractionResult.SUCCESS;
+        }
+
+        if (!(be instanceof WandBindable bindable)) {
+            return InteractionResult.PASS;
         }
 
         // 没有完成绑定，就尝试选中/取消选中当前 WandBindable 方块
