@@ -193,6 +193,11 @@ dependencies {
     implementation fg.deobf("curse.maven:ex-pattern-provider-892005:7248944")
     implementation fg.deobf("curse.maven:architectury-api-419699:5137938")
 
+    //植物魔法
+    implementation fg.deobf("curse.maven:botania-225643:6870713")
+    implementation fg.deobf("curse.maven:patchouli-306770:6164575")
+    implementation fg.deobf("curse.maven:curios-309927:6418456")
+
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html

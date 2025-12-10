@@ -10,7 +10,8 @@
     "ae2.OmniToolItemAEMenuItemMixin",
     "mebeamformer.WirelessEnergyTowerRendererMixin",
     "powah.EnergizingOrbBlockMixin",
-    "powah.EnergizingRodRendererMixin"
+    "powah.EnergizingRodRendererMixin",
+    "botania.PlayerHelperMixin"
   ],
   "client": [
   ],

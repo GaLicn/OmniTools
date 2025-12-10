@@ -1,6 +1,8 @@
 package com.omnitools.compat;
 
 import com.omnitools.compat.ae2.AE2RenameUseHandler;
+import com.omnitools.compat.botania.BotaniaWandLinkWrenchHandler;
+import com.omnitools.compat.botania.BotaniaWandFunctionWrenchHandler;
 import com.omnitools.compat.create.CreateValueSettingsPreHandler;
 import com.omnitools.compat.entangled.EntangledBinderUseHandler;
 import com.omnitools.compat.entangled.EntangledBinderWrenchHandler;
@@ -39,6 +41,12 @@ public class CompatBootstrap {
         // Powah
         if (ModList.get().isLoaded("powah")) {
             WrenchHandlerRegistry.register(new PowahLinkWrenchHandler());
+        }
+
+        // Botania
+        if (ModList.get().isLoaded("botania")) {
+            WrenchHandlerRegistry.register(new BotaniaWandLinkWrenchHandler());
+            WrenchHandlerRegistry.register(new BotaniaWandFunctionWrenchHandler());
         }
 
         // ME Beam Former

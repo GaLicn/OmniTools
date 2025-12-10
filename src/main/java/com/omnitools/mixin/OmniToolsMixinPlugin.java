@@ -32,6 +32,9 @@ public class OmniToolsMixinPlugin implements IMixinConfigPlugin {
         if (mixinClassName.startsWith("com.omnitools.omniTools.mixin.ae2.")) {
             return isModLoaded("ae2");
         }
+        if (mixinClassName.startsWith("com.omnitools.mixin.botania.")) {
+            return isModLoaded("botania");
+        }
         return true;
     }
 
