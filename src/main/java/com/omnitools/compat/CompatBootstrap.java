@@ -41,6 +41,12 @@ public class CompatBootstrap {
             WrenchHandlerRegistry.register(new PowahLinkWrenchHandler());
         }
 
+        // ME Beam Former
+        if (ModList.get().isLoaded("me_beam_former")) {
+            WrenchHandlerRegistry.register(new MEBeamFormerWrenchHandler());
+            UseHandlerRegistry.register(new MEBeamFormerUseHandler());
+        }
+
         // Entangled
         if (ModList.get().isLoaded("entangled")) {
             WrenchHandlerRegistry.register(new EntangledBinderWrenchHandler());
@@ -48,14 +54,8 @@ public class CompatBootstrap {
             MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, EntangledHighlightHandler::onRenderLevel);
         }
 
-        // ME Beam Former
-        if (ModList.get().isLoaded("me_beam_former")) {
-            WrenchHandlerRegistry.register(new MEBeamFormerWrenchHandler());
-            UseHandlerRegistry.register(new MEBeamFormerUseHandler());
-        }
-
         // ExtendedAE - event listener
-        if (ModList.get().isLoaded("extendedae")) {
+        if (ModList.get().isLoaded("expatternprovider")) {
             MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGHEST, ExtendedAERenamePreHandler::onRightClickBlock);
         }
 
