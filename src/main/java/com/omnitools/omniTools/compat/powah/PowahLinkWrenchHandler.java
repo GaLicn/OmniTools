@@ -55,15 +55,15 @@ public class PowahLinkWrenchHandler implements IWrenchHandler {
                 V3d v3d = V3d.from(orbPos);
                 if ((int) v3d.distance(pos) <= Powah.config().general.energizing_range) {
                     rod.setOrbPos(orbPos);
-                    player.displayClientMessage(Component.translatable("chat.powah.wrench.link.done").withStyle(ChatFormatting.GOLD), true);
+                    player.displayClientMessage(Component.translatable("omnitools.compat.powah").append(" ").append(Component.translatable("chat.powah.wrench.link.done").withStyle(ChatFormatting.GOLD)), true);
                 } else {
-                    player.displayClientMessage(Component.translatable("chat.powah.wrench.link.fail").withStyle(ChatFormatting.RED), true);
+                    player.displayClientMessage(Component.translatable("omnitools.compat.powah").append(" ").append(Component.translatable("chat.powah.wrench.link.fail").withStyle(ChatFormatting.RED)), true);
                 }
             }
             stack.remove(PowahComponents.LINK_ORB_POS);
         } else {
             stack.set(PowahComponents.LINK_ROD_POS, pos);
-            player.displayClientMessage(Component.translatable("chat.powah.wrench.link.start").withStyle(ChatFormatting.YELLOW), true);
+            player.displayClientMessage(Component.translatable("omnitools.compat.powah").append(" ").append(Component.translatable("chat.powah.wrench.link.start").withStyle(ChatFormatting.YELLOW)), true);
         }
         return InteractionResult.SUCCESS;
     }
@@ -75,15 +75,15 @@ public class PowahLinkWrenchHandler implements IWrenchHandler {
                 V3d v3d = V3d.from(rodPos);
                 if ((int) v3d.distance(pos) <= Powah.config().general.energizing_range) {
                     rod.setOrbPos(pos);
-                    player.displayClientMessage(Component.translatable("chat.powah.wrench.link.done").withStyle(ChatFormatting.GOLD), true);
+                    player.displayClientMessage(Component.translatable("omnitools.compat.powah").append(" ").append(Component.translatable("chat.powah.wrench.link.done").withStyle(ChatFormatting.GOLD)), true);
                 } else {
-                    player.displayClientMessage(Component.translatable("chat.powah.wrench.link.fail").withStyle(ChatFormatting.RED), true);
+                    player.displayClientMessage(Component.translatable("omnitools.compat.powah").append(" ").append(Component.translatable("chat.powah.wrench.link.fail").withStyle(ChatFormatting.RED)), true);
                 }
             }
             stack.remove(PowahComponents.LINK_ROD_POS);
         } else {
             stack.set(PowahComponents.LINK_ORB_POS, pos);
-            player.displayClientMessage(Component.translatable("chat.powah.wrench.link.start").withStyle(ChatFormatting.YELLOW), true);
+            player.displayClientMessage(Component.translatable("omnitools.compat.powah").append(" ").append(Component.translatable("chat.powah.wrench.link.start").withStyle(ChatFormatting.YELLOW)), true);
         }
         return InteractionResult.SUCCESS;
     }

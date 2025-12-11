@@ -23,9 +23,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
-/**
- * ExtendedAE 无线连接器/Hub 兼容（LINK 模式），仿原无线工具行为。
- */
 public class ExtendedAEWirelessWrenchHandler implements IWrenchHandler {
     @Override
     public boolean canHandle(WrenchContext context) {
@@ -73,27 +70,27 @@ public class ExtendedAEWirelessWrenchHandler implements IWrenchHandler {
             long freq = locator.left();
             GlobalPos globalPos = locator.right();
             if (globalPos == null) {
-                player.displayClientMessage(WirelessFail.MISSING.getTranslation(), true);
+                player.displayClientMessage(Component.translatable("omnitools.compat.extendedae").append(" ").append(WirelessFail.MISSING.getTranslation()), true);
                 return InteractionResult.SUCCESS;
             }
             var otherPos = globalPos.pos();
             var otherDim = globalPos.dimension();
             var thisDim = level.dimension();
             if (otherPos.equals(thisPos) && otherDim.equals(thisDim)) {
-                player.displayClientMessage(WirelessFail.SELF_REFERENCE.getTranslation(), true);
+                player.displayClientMessage(Component.translatable("omnitools.compat.extendedae").append(" ").append(WirelessFail.SELF_REFERENCE.getTranslation()), true);
                 return InteractionResult.SUCCESS;
             }
             if (!otherDim.equals(thisDim)) {
-                player.displayClientMessage(WirelessFail.CROSS_DIMENSION.getTranslation(), true);
+                player.displayClientMessage(Component.translatable("omnitools.compat.extendedae").append(" ").append(WirelessFail.CROSS_DIMENSION.getTranslation()), true);
                 return InteractionResult.SUCCESS;
             }
             if (Math.sqrt(otherPos.distSqr(thisPos)) > EAEConfig.wirelessMaxRange) {
-                player.displayClientMessage(WirelessFail.OUT_OF_RANGE.getTranslation(), true);
+                player.displayClientMessage(Component.translatable("omnitools.compat.extendedae").append(" ").append(WirelessFail.OUT_OF_RANGE.getTranslation()), true);
                 return InteractionResult.SUCCESS;
             }
             ServerLevel otherWorld = level.getServer().getLevel(otherDim);
             if (otherWorld == null) {
-                player.displayClientMessage(WirelessFail.MISSING.getTranslation(), true);
+                player.displayClientMessage(Component.translatable("omnitools.compat.extendedae").append(" ").append(WirelessFail.MISSING.getTranslation()), true);
                 return InteractionResult.SUCCESS;
             }
             BlockEntity otherTile = otherWorld.getBlockEntity(otherPos);
@@ -101,21 +98,21 @@ public class ExtendedAEWirelessWrenchHandler implements IWrenchHandler {
                 otherConnector.setFrequency(freq);
                 tile.setFrequency(freq);
                 stack.remove(EAESingletons.WIRELESS_LOCATOR); // Connector 成功后清除
-                player.displayClientMessage(Component.translatable("chat.wireless_connect", thisPos.getX(), thisPos.getY(), thisPos.getZ()), true);
+                player.displayClientMessage(Component.translatable("omnitools.compat.extendedae").append(" ").append(Component.translatable("chat.wireless_connect", thisPos.getX(), thisPos.getY(), thisPos.getZ())), true);
                 return InteractionResult.SUCCESS;
             } else if (otherTile instanceof TileWirelessHub otherHub) {
                 int port = otherHub.allocatePort();
                 if (port < 0) {
-                    player.displayClientMessage(WirelessFail.OUT_OF_PORT.getTranslation(), true);
+                    player.displayClientMessage(Component.translatable("omnitools.compat.extendedae").append(" ").append(WirelessFail.OUT_OF_PORT.getTranslation()), true);
                     return InteractionResult.SUCCESS;
                 }
                 otherHub.setFrequency(freq, port);
                 tile.setFrequency(freq);
                 stack.remove(EAESingletons.WIRELESS_LOCATOR); // Connector 成功后清除
-                player.displayClientMessage(Component.translatable("chat.wireless_connect", thisPos.getX(), thisPos.getY(), thisPos.getZ()), true);
+                player.displayClientMessage(Component.translatable("omnitools.compat.extendedae").append(" ").append(Component.translatable("chat.wireless_connect", thisPos.getX(), thisPos.getY(), thisPos.getZ())), true);
                 return InteractionResult.SUCCESS;
             }
-            player.displayClientMessage(WirelessFail.MISSING.getTranslation(), true);
+            player.displayClientMessage(Component.translatable("omnitools.compat.extendedae").append(" ").append(WirelessFail.MISSING.getTranslation()), true);
             return InteractionResult.SUCCESS;
         }
 
@@ -123,7 +120,7 @@ public class ExtendedAEWirelessWrenchHandler implements IWrenchHandler {
         long freq = tile.getNewFreq();
         GlobalPos globalPos = GlobalPos.of(level.dimension(), thisPos);
         stack.set(EAESingletons.WIRELESS_LOCATOR, Pair.of(freq, globalPos));
-        player.displayClientMessage(Component.translatable("chat.wireless_bind", thisPos.getX(), thisPos.getY(), thisPos.getZ()), true);
+        player.displayClientMessage(Component.translatable("omnitools.compat.extendedae").append(" ").append(Component.translatable("chat.wireless_bind", thisPos.getX(), thisPos.getY(), thisPos.getZ())), true);
         return InteractionResult.SUCCESS;
     }
 
@@ -131,7 +128,7 @@ public class ExtendedAEWirelessWrenchHandler implements IWrenchHandler {
         var locator = stack.get(EAESingletons.WIRELESS_LOCATOR);
         int port = tile.allocatePort();
         if (port < 0) {
-            player.displayClientMessage(WirelessFail.OUT_OF_PORT.getTranslation(), true);
+            player.displayClientMessage(Component.translatable("omnitools.compat.extendedae").append(" ").append(WirelessFail.OUT_OF_PORT.getTranslation()), true);
             return InteractionResult.SUCCESS;
         }
 
@@ -140,47 +137,47 @@ public class ExtendedAEWirelessWrenchHandler implements IWrenchHandler {
             long freq = locator.left();
             GlobalPos globalPos = locator.right();
             if (globalPos == null) {
-                player.displayClientMessage(WirelessFail.MISSING.getTranslation(), true);
+                player.displayClientMessage(Component.translatable("omnitools.compat.extendedae").append(" ").append(WirelessFail.MISSING.getTranslation()), true);
                 return InteractionResult.SUCCESS;
             }
             var otherPos = globalPos.pos();
             var otherDim = globalPos.dimension();
             var thisDim = level.dimension();
             if (otherPos.equals(thisPos) && otherDim.equals(thisDim)) {
-                player.displayClientMessage(WirelessFail.SELF_REFERENCE.getTranslation(), true);
+                player.displayClientMessage(Component.translatable("omnitools.compat.extendedae").append(" ").append(WirelessFail.SELF_REFERENCE.getTranslation()), true);
                 return InteractionResult.SUCCESS;
             }
             if (!otherDim.equals(thisDim)) {
-                player.displayClientMessage(WirelessFail.CROSS_DIMENSION.getTranslation(), true);
+                player.displayClientMessage(Component.translatable("omnitools.compat.extendedae").append(" ").append(WirelessFail.CROSS_DIMENSION.getTranslation()), true);
                 return InteractionResult.SUCCESS;
             }
             if (Math.sqrt(otherPos.distSqr(thisPos)) > EAEConfig.wirelessMaxRange) {
-                player.displayClientMessage(WirelessFail.OUT_OF_RANGE.getTranslation(), true);
+                player.displayClientMessage(Component.translatable("omnitools.compat.extendedae").append(" ").append(WirelessFail.OUT_OF_RANGE.getTranslation()), true);
                 return InteractionResult.SUCCESS;
             }
             ServerLevel otherWorld = level.getServer().getLevel(otherDim);
             if (otherWorld == null) {
-                player.displayClientMessage(WirelessFail.MISSING.getTranslation(), true);
+                player.displayClientMessage(Component.translatable("omnitools.compat.extendedae").append(" ").append(WirelessFail.MISSING.getTranslation()), true);
                 return InteractionResult.SUCCESS;
             }
             BlockEntity otherTile = otherWorld.getBlockEntity(otherPos);
             if (otherTile instanceof TileWirelessConnector otherConnector) {
                 otherConnector.setFrequency(freq);
                 tile.setFrequency(freq, port);
-                player.displayClientMessage(Component.translatable("chat.wireless_connect", thisPos.getX(), thisPos.getY(), thisPos.getZ()), true);
+                player.displayClientMessage(Component.translatable("omnitools.compat.extendedae").append(" ").append(Component.translatable("chat.wireless_connect", thisPos.getX(), thisPos.getY(), thisPos.getZ())), true);
                 return InteractionResult.SUCCESS;
             } else if (otherTile instanceof TileWirelessHub otherHub) {
                 int otherPort = otherHub.allocatePort();
                 if (otherPort < 0) {
-                    player.displayClientMessage(WirelessFail.OUT_OF_PORT.getTranslation(), true);
+                    player.displayClientMessage(Component.translatable("omnitools.compat.extendedae").append(" ").append(WirelessFail.OUT_OF_PORT.getTranslation()), true);
                     return InteractionResult.SUCCESS;
                 }
                 otherHub.setFrequency(freq, otherPort);
                 tile.setFrequency(freq, port);
-                player.displayClientMessage(Component.translatable("chat.wireless_connect", thisPos.getX(), thisPos.getY(), thisPos.getZ()), true);
+                player.displayClientMessage(Component.translatable("omnitools.compat.extendedae").append(" ").append(Component.translatable("chat.wireless_connect", thisPos.getX(), thisPos.getY(), thisPos.getZ())), true);
                 return InteractionResult.SUCCESS;
             }
-            player.displayClientMessage(WirelessFail.MISSING.getTranslation(), true);
+            player.displayClientMessage(Component.translatable("omnitools.compat.extendedae").append(" ").append(WirelessFail.MISSING.getTranslation()), true);
             return InteractionResult.SUCCESS;
         }
 
@@ -188,7 +185,7 @@ public class ExtendedAEWirelessWrenchHandler implements IWrenchHandler {
         long freq = tile.getNewFreq();
         GlobalPos globalPos = GlobalPos.of(level.dimension(), thisPos);
         stack.set(EAESingletons.WIRELESS_LOCATOR, Pair.of(freq, globalPos));
-        player.displayClientMessage(Component.translatable("chat.wireless_bind", thisPos.getX(), thisPos.getY(), thisPos.getZ()), true);
+        player.displayClientMessage(Component.translatable("omnitools.compat.extendedae").append(" ").append(Component.translatable("chat.wireless_bind", thisPos.getX(), thisPos.getY(), thisPos.getZ())), true);
         return InteractionResult.SUCCESS;
     }
 }

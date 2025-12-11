@@ -19,9 +19,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
-/**
- * 将 Draconic Evolution 的水晶链接器（Crystal Binder）逻辑接入扳手 LINK 模式。
- */
 public class DraconicLinkWrenchHandler implements IWrenchHandler {
     @Override
     public boolean canHandle(WrenchContext context) {
@@ -62,13 +59,13 @@ public class DraconicLinkWrenchHandler implements IWrenchHandler {
         // 选中源：SHIFT + 右键可链接方块（仅当尚未绑定）
         if (isLinkable && player.isShiftKeyDown() && !isBound) {
             bind(stack, pos, ((ServerLevel) level).dimension());
-            ChatHelper.sendIndexed(player, Component.translatable("gui.draconicevolution.energy_net.pos_saved_to_tool"), TileCrystalBase.MSG_ID);
+            ChatHelper.sendIndexed(player, Component.translatable("omnitools.compat.draconicevolution").append(" ").append(Component.translatable("gui.draconicevolution.energy_net.pos_saved_to_tool")), TileCrystalBase.MSG_ID);
             return InteractionResult.SUCCESS;
         }
 
         // 未绑定但点到可链接方块，提示需要先绑定
         if (isLinkable && !isBound) {
-            ChatHelper.sendIndexed(player, Component.translatable("gui.draconicevolution.energy_net.tool_not_bound"), TileCrystalBase.MSG_ID);
+            ChatHelper.sendIndexed(player, Component.translatable("omnitools.compat.draconicevolution").append(" ").append(Component.translatable("gui.draconicevolution.energy_net.tool_not_bound")), TileCrystalBase.MSG_ID);
             return InteractionResult.SUCCESS;
         }
 
@@ -76,7 +73,7 @@ public class DraconicLinkWrenchHandler implements IWrenchHandler {
         if (isBound) {
             BlockPos boundPos = getBound(stack);
             if (boundPos.equals(pos)) {
-                ChatHelper.sendIndexed(player, Component.translatable("gui.draconicevolution.energy_net.link_to_self"), TileCrystalBase.MSG_ID);
+                ChatHelper.sendIndexed(player, Component.translatable("omnitools.compat.draconicevolution").append(" ").append(Component.translatable("gui.draconicevolution.energy_net.link_to_self")), TileCrystalBase.MSG_ID);
                 return InteractionResult.SUCCESS;
             }
 
@@ -84,7 +81,7 @@ public class DraconicLinkWrenchHandler implements IWrenchHandler {
             if (boundTile instanceof ICrystalLink link) {
                 link.binderUsed(player, pos, face);
             } else {
-                ChatHelper.sendIndexed(player, Component.translatable("gui.draconicevolution.energy_net.bound_to_invalid"), TileCrystalBase.MSG_ID);
+                ChatHelper.sendIndexed(player, Component.translatable("omnitools.compat.draconicevolution").append(" ").append(Component.translatable("gui.draconicevolution.energy_net.bound_to_invalid")), TileCrystalBase.MSG_ID);
             }
             return InteractionResult.SUCCESS;
         }

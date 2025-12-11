@@ -7,9 +7,6 @@ import com.omnitools.omniTools.core.ToolMode;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.item.ItemStack;
 
-/**
- * 潜行对空气右键清除 ExtendedAE 无线绑定。
- */
 public class ExtendedAEWirelessUseHandler implements IUseHandler {
     @Override
     public boolean canHandle(UseContext context) {

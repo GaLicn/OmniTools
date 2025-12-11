@@ -1,17 +1,12 @@
 package com.omnitools.omniTools.compat.draconicevolution;
 
-import com.brandon3055.draconicevolution.api.energy.ICrystalBinder;
 import com.omnitools.omniTools.api.IUseHandler;
 import com.omnitools.omniTools.api.UseContext;
 import com.omnitools.omniTools.core.ToolMode;
 import com.brandon3055.draconicevolution.init.ItemData;
-import net.minecraft.core.GlobalPos;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.item.ItemStack;
 
-/**
- * 潜行对空气右键清除绑定（仿原版 Crystal Binder）。
- */
 public class DraconicLinkUseHandler implements IUseHandler {
     @Override
     public boolean canHandle(UseContext context) {
