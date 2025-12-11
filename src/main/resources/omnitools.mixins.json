@@ -14,6 +14,7 @@
     "botania.PlayerHelperMixin"
   ],
   "client": [
+    "draconicevolution.ClientEventHandlerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

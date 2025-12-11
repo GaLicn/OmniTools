@@ -13,6 +13,8 @@ import com.omnitools.compat.mebeamformer.MEBeamFormerUseHandler;
 import com.omnitools.compat.mebeamformer.MEBeamFormerWrenchHandler;
 import com.omnitools.compat.mekanism.MekanismTransmitterWrenchHandler;
 import com.omnitools.compat.powah.PowahLinkWrenchHandler;
+import com.omnitools.compat.draconicevolution.DraconicLinkWrenchHandler;
+import com.omnitools.compat.draconicevolution.DraconicLinkUseHandler;
 import com.omnitools.core.UseHandlerRegistry;
 import com.omnitools.core.WrenchHandlerRegistry;
 import net.minecraftforge.api.distmarker.Dist;
@@ -26,6 +28,12 @@ public class CompatBootstrap {
         // Immersive Engineering
         if (ModList.get().isLoaded("immersiveengineering")) {
             WrenchHandlerRegistry.register(new IEWrenchHandler());
+        }
+
+        // Draconic Evolution
+        if (ModList.get().isLoaded("draconicevolution")) {
+            WrenchHandlerRegistry.register(new DraconicLinkWrenchHandler());
+            UseHandlerRegistry.register(new DraconicLinkUseHandler());
         }
 
         // Mekanism

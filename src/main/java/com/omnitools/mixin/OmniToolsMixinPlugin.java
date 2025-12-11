@@ -35,6 +35,9 @@ public class OmniToolsMixinPlugin implements IMixinConfigPlugin {
         if (mixinClassName.startsWith("com.omnitools.mixin.botania.")) {
             return isModLoaded("botania");
         }
+        if (mixinClassName.startsWith("com.omnitools.mixin.draconicevolution.")){
+            return isModLoaded("draconicevolution");
+        }
         return true;
     }
 
