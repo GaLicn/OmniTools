@@ -203,6 +203,11 @@ dependencies {
     implementation fg.deobf("curse.maven:brandons-core-231382:5422013")
     implementation fg.deobf("curse.maven:codechicken-lib-1-8-242818:5753868")
 
+    //gregtech
+    implementation fg.deobf("curse.maven:configuration-444699:5840405")
+    implementation fg.deobf("curse.maven:ldlib-626676:7270711")
+    implementation fg.deobf("curse.maven:gregtechceu-modern-890405:7262157")
+
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
