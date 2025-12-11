@@ -7,6 +7,8 @@ import com.omnitools.compat.create.CreateValueSettingsPreHandler;
 import com.omnitools.compat.entangled.EntangledBinderUseHandler;
 import com.omnitools.compat.entangled.EntangledBinderWrenchHandler;
 import com.omnitools.compat.entangled.EntangledHighlightHandler;
+import com.omnitools.compat.extendedae.ExtendedAEWirelessWrenchHandler;
+import com.omnitools.compat.extendedae.ExtendedAEWirelessUseHandler;
 import com.omnitools.compat.extendedae.ExtendedAERenamePreHandler;
 import com.omnitools.compat.immersiveengineering.IEWrenchHandler;
 import com.omnitools.compat.mebeamformer.MEBeamFormerUseHandler;
@@ -46,6 +48,12 @@ public class CompatBootstrap {
             UseHandlerRegistry.register(new AE2RenameUseHandler());
         }
 
+        // ExtendedAE无线连接器
+        if (ModList.get().isLoaded("expatternprovider")) {
+            WrenchHandlerRegistry.register(new ExtendedAEWirelessWrenchHandler());
+            UseHandlerRegistry.register(new ExtendedAEWirelessUseHandler());
+        }
+
         // Powah
         if (ModList.get().isLoaded("powah")) {
             WrenchHandlerRegistry.register(new PowahLinkWrenchHandler());
@@ -70,12 +78,12 @@ public class CompatBootstrap {
             MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, EntangledHighlightHandler::onRenderLevel);
         }
 
-        // ExtendedAE - event listener
+        // ExtendedAE - 事件监听
         if (ModList.get().isLoaded("expatternprovider")) {
             MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGHEST, ExtendedAERenamePreHandler::onRightClickBlock);
         }
 
-        // Create - event listener
+        // Create - 事件监听
         if (ModList.get().isLoaded("create")) {
             MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGHEST, CreateValueSettingsPreHandler::onRightClickBlock);
         }
