@@ -7,9 +7,7 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
-/**
- * 兼容 ExtendedAE 无线工具的“潜行对空气右键清除绑定”。
- */
+
 public class ExtendedAEWirelessUseHandler implements IUseHandler {
     @Override
     public boolean canHandle(UseContext context) {

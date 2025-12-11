@@ -8,5 +8,9 @@
   "toolmode.omnitools.rename": "改名模式[石英切割刀]",
   "message.omnitools.mode_switched": "§6[Omni工具] §r模式切换为：§e%s",
   "tooltip.omnitools.omni_wrench.main": "多模组通用的全能扳手，拥有三个模式状态",
-  "tooltip.omnitools.omni_wrench.controls": "在控制选项中绑定按键（默认：左 Alt）来切换模式。"
+  "tooltip.omnitools.omni_wrench.controls": "在控制选项中绑定按键（默认：左 Alt）来切换模式。",
+  "omnitools.compat.draconicevolution": "§6[OmniTools] §r龙之研究",
+  "omnitools.compat.extendedae": "§6[OmniTools] §r扩展AE",
+  "omnitools.compat.powah": "§6[OmniTools] §rPowah",
+  "omnitools.compat.entangled": "§6[OmniTools] §r纠缠方块"
 }

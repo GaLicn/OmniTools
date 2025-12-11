@@ -5,6 +5,7 @@ import com.omnitools.api.UseContext;
 import com.omnitools.core.ToolMode;
 import com.supermartijn642.core.TextComponents;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -44,7 +45,7 @@ public class EntangledBinderUseHandler implements IUseHandler {
                 nbt.remove("boundz");
                 nbt.remove("blockstate");
             }
-            player.displayClientMessage(TextComponents.translation("entangled.entangled_binder.clear").color(ChatFormatting.YELLOW).get(), true);
+            player.displayClientMessage(Component.translatable("omnitools.compat.entangled").append(" ").append(TextComponents.translation("entangled.entangled_binder.clear").color(ChatFormatting.YELLOW).get()), true);
         }
 
         return InteractionResultHolder.success(stack);

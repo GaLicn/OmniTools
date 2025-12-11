@@ -59,15 +59,15 @@ public class PowahLinkWrenchHandler implements IWrenchHandler {
                 Vec3 rodPos = Vec3.atCenterOf(pos);
                 if ((int) v3d.distanceTo(rodPos) <= Powah.config().general.energizing_range) {
                     rod.setOrbPos(orbPos);
-                    player.displayClientMessage(Component.translatable("chat.powah.wrench.link.done").withStyle(ChatFormatting.GOLD), true);
+                    player.displayClientMessage(Component.translatable("omnitools.compat.powah").append(" ").append(Component.translatable("chat.powah.wrench.link.done").withStyle(ChatFormatting.GOLD)), true);
                 } else {
-                    player.displayClientMessage(Component.translatable("chat.powah.wrench.link.fail").withStyle(ChatFormatting.RED), true);
+                    player.displayClientMessage(Component.translatable("omnitools.compat.powah").append(" ").append(Component.translatable("chat.powah.wrench.link.fail").withStyle(ChatFormatting.RED)), true);
                 }
             }
             nbt.remove("OrbPos");
         } else {
             nbt.put("RodPos", NbtUtils.writeBlockPos(pos));
-            player.displayClientMessage(Component.translatable("chat.powah.wrench.link.start").withStyle(ChatFormatting.YELLOW), true);
+            player.displayClientMessage(Component.translatable("omnitools.compat.powah").append(" ").append(Component.translatable("chat.powah.wrench.link.start").withStyle(ChatFormatting.YELLOW)), true);
         }
         return InteractionResult.SUCCESS;
     }
@@ -82,15 +82,15 @@ public class PowahLinkWrenchHandler implements IWrenchHandler {
                 Vec3 orbPos = Vec3.atCenterOf(pos);
                 if ((int) v3d.distanceTo(orbPos) <= Powah.config().general.energizing_range) {
                     rod.setOrbPos(pos);
-                    player.displayClientMessage(Component.translatable("chat.powah.wrench.link.done").withStyle(ChatFormatting.GOLD), true);
+                    player.displayClientMessage(Component.translatable("omnitools.compat.powah").append(" ").append(Component.translatable("chat.powah.wrench.link.done").withStyle(ChatFormatting.GOLD)), true);
                 } else {
-                    player.displayClientMessage(Component.translatable("chat.powah.wrench.link.fail").withStyle(ChatFormatting.RED), true);
+                    player.displayClientMessage(Component.translatable("omnitools.compat.powah").append(" ").append(Component.translatable("chat.powah.wrench.link.fail").withStyle(ChatFormatting.RED)), true);
                 }
             }
             nbt.remove("RodPos");
         } else {
             nbt.put("OrbPos", NbtUtils.writeBlockPos(pos));
-            player.displayClientMessage(Component.translatable("chat.powah.wrench.link.start").withStyle(ChatFormatting.YELLOW), true);
+            player.displayClientMessage(Component.translatable("omnitools.compat.powah").append(" ").append(Component.translatable("chat.powah.wrench.link.start").withStyle(ChatFormatting.YELLOW)), true);
         }
         return InteractionResult.SUCCESS;
     }
