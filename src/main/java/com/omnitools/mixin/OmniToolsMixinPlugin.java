@@ -23,13 +23,13 @@ public class OmniToolsMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        if (mixinClassName.startsWith("com.omnitools.omniTools.mixin.powah.")) {
+        if (mixinClassName.startsWith("com.omnitools.mixin.powah.")) {
             return isModLoaded("powah");
         }
-        if (mixinClassName.startsWith("com.omnitools.omniTools.mixin.mebeamformer.")) {
+        if (mixinClassName.startsWith("com.omnitools.mixin.mebeamformer.")) {
             return isModLoaded("me_beam_former");
         }
-        if (mixinClassName.startsWith("com.omnitools.omniTools.mixin.ae2.")) {
+        if (mixinClassName.startsWith("com.omnitools.mixin.ae2.")) {
             return isModLoaded("ae2");
         }
         if (mixinClassName.startsWith("com.omnitools.mixin.botania.")) {

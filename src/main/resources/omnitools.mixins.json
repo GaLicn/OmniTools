@@ -8,12 +8,12 @@
   "mixins": [
     "ItemStackMixin",
     "ae2.OmniToolItemAEMenuItemMixin",
-    "mebeamformer.WirelessEnergyTowerRendererMixin",
     "powah.EnergizingOrbBlockMixin",
-    "powah.EnergizingRodRendererMixin",
     "botania.PlayerHelperMixin"
   ],
   "client": [
+    "mebeamformer.WirelessEnergyTowerRendererMixin",
+    "powah.EnergizingRodRendererMixin",
     "draconicevolution.ClientEventHandlerMixin"
   ],
   "injectors": {

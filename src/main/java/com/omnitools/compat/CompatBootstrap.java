@@ -75,7 +75,9 @@ public class CompatBootstrap {
         if (ModList.get().isLoaded("entangled")) {
             WrenchHandlerRegistry.register(new EntangledBinderWrenchHandler());
             UseHandlerRegistry.register(new EntangledBinderUseHandler());
-            MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, EntangledHighlightHandler::onRenderLevel);
+            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () ->
+                    MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, EntangledHighlightHandler::onRenderLevel)
+            );
         }
 
         // ExtendedAE - 事件监听
