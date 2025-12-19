@@ -1,3 +1,13 @@
+# OmniTools 1.2.0
+
+## 中文
+- 添加全能金刚杵-全功能挖掘工具，可以调节挖掘速率以及自动拾取模式,并且用于扳手标签
+- 全能扳手添加配置模式，目前兼容mek配置卡，ae2内存卡
+
+## English
+- Added Omni Vajra - an all-in-one mining tool with adjustable mining speed and auto pickup mode; also tagged as a wrench tool
+- Added CONFIG mode for Omni Wrench; currently compatible with Mekanism Configuration Card and AE2 Memory Card
+
 # OmniTools 1.1.0
 
 ## 中文
