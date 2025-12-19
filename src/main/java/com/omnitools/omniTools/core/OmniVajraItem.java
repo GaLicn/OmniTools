@@ -12,10 +12,13 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tiers;
@@ -35,6 +38,7 @@ import net.neoforged.neoforge.registries.holdersets.AnyHolderSet;
 
 public class OmniVajraItem extends Item {
     private static final String MINING_SPEED_TAG = "VajraMiningSpeed";
+    private static final String AUTO_PICKUP_TAG = "VajraAutoPickupEnabled";
     private static final float MIN_MINING_SPEED = 1.0F;
     private static final float MAX_MINING_SPEED = 1000.0F;
 
@@ -93,6 +97,45 @@ public class OmniVajraItem extends Item {
         stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
     }
 
+    public static boolean isAutoPickupEnabled(ItemStack stack) {
+        if (stack.isEmpty()) {
+            return true;
+        }
+        CustomData customData = stack.get(DataComponents.CUSTOM_DATA);
+        if (customData != null) {
+            CompoundTag tag = customData.copyTag();
+            if (tag.contains(AUTO_PICKUP_TAG)) {
+                return tag.getBoolean(AUTO_PICKUP_TAG);
+            }
+        }
+        return true;
+    }
+
+    public static void setAutoPickupEnabled(ItemStack stack, boolean enabled) {
+        if (stack.isEmpty()) {
+            return;
+        }
+        CustomData customData = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
+        CompoundTag tag = customData.copyTag();
+        tag.putBoolean(AUTO_PICKUP_TAG, enabled);
+        stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
+    }
+
+    private static void toggleAutoPickup(ItemStack stack, Level level, Player player) {
+        if (level.isClientSide) {
+            return;
+        }
+        boolean enabled = !isAutoPickupEnabled(stack);
+        setAutoPickupEnabled(stack, enabled);
+        player.displayClientMessage(
+                Component.translatable(
+                        "message.omnitools.vajra_pickup_mode",
+                        Component.translatable(enabled ? "message.omnitools.vajra_pickup_mode_on" : "message.omnitools.vajra_pickup_mode_off")
+                ),
+                true
+        );
+    }
+
     @Override
     public float getDestroySpeed(ItemStack stack, BlockState state) {
         return getMiningSpeed(stack);
@@ -104,12 +147,27 @@ public class OmniVajraItem extends Item {
     }
 
     @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
+        if (player.isShiftKeyDown()) {
+            toggleAutoPickup(stack, level, player);
+            return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
+        }
+        return super.use(level, player, hand);
+    }
+
+    @Override
     public InteractionResult useOn(UseOnContext context) {
         var level = context.getLevel();
         var pos = context.getClickedPos();
         var state = level.getBlockState(pos);
         var stack = context.getItemInHand();
         var player = context.getPlayer();
+
+        if (player != null && player.isShiftKeyDown()) {
+            toggleAutoPickup(stack, level, player);
+            return InteractionResult.sidedSuccess(level.isClientSide);
+        }
 
         BlockState modifiedState = null;
         SoundEvent sound = null;
@@ -177,6 +235,9 @@ public class OmniVajraItem extends Item {
 
     @Override
     public boolean mineBlock(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity entity) {
+        if (!isAutoPickupEnabled(stack)) {
+            return super.mineBlock(stack, level, state, pos, entity);
+        }
         if (!(level instanceof ServerLevel serverLevel)) {
             return true; // 客户端什么都不做
         }

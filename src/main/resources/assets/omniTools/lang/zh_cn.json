@@ -1,5 +1,6 @@
 {
   "item.omnitools.omni_wrench": "全能扳手",
+  "item.omnitools.omni_vajra": "全能金刚杵",
   "itemGroup.omnitools": "全能工具",
   "key.categories.omnitools": "OmniTools 控制",
   "key.omnitools.cycle_mode": "Omni 扳手：切换模式",
@@ -8,6 +9,9 @@
   "toolmode.omnitools.rename": "改名模式[石英切割刀]",
   "message.omnitools.mode_switched": "§6[Omni工具] §r模式切换为：§e%s",
   "message.omnitools.vajra_mining_speed": "§6[Omni工具] §r挖掘速度：§e%s",
+  "message.omnitools.vajra_pickup_mode": "§6[Omni工具] §r自动拾取：§e%s",
+  "message.omnitools.vajra_pickup_mode_on": "开启",
+  "message.omnitools.vajra_pickup_mode_off": "关闭",
   "tooltip.omnitools.omni_wrench.main": "多模组通用的全能扳手，拥有三个模式状态",
   "tooltip.omnitools.omni_wrench.controls": "在控制选项中绑定按键（默认：左 Alt）来切换模式。",
   "omnitools.compat.draconicevolution": "§6[OmniTools] §r龙之研究",
