@@ -21,5 +21,6 @@
   "omnitools.compat.extendedae": "[OmniTools] ExtendedAE",
   "omnitools.compat.powah": "[OmniTools] Powah",
   "omnitools.compat.entangled": "[OmniTools] Entangled",
-  "omnitools.compat.mekanism": "[OmniTools] Mekanism"
+  "omnitools.compat.mekanism": "[OmniTools] Mekanism",
+  "omnitools.compat.ae2": "[OmniTools] Applied Energistics 2"
 }

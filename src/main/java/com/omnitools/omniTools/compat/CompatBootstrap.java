@@ -1,6 +1,9 @@
 package com.omnitools.omniTools.compat;
 
 import com.omnitools.omniTools.compat.ae2.AE2RenameUseHandler;
+import com.omnitools.omniTools.compat.ae2.Ae2MemoryCardUseHandler;
+import com.omnitools.omniTools.compat.ae2.Ae2MemoryCardWrenchHandler;
+import com.omnitools.omniTools.compat.ae2.Ae2MemoryCardPreHandler;
 import com.omnitools.omniTools.compat.create.CreateValueSettingsPreHandler;
 import com.omnitools.omniTools.compat.entangled.EntangledBinderUseHandler;
 import com.omnitools.omniTools.compat.entangled.EntangledBinderWrenchHandler;
@@ -35,6 +38,9 @@ public class CompatBootstrap {
             UseHandlerRegistry.register(new MekanismConfigCardUseHandler());
         }
         if (ModList.get().isLoaded("ae2")) {
+            NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, Ae2MemoryCardPreHandler::onRightClickBlock);
+            WrenchHandlerRegistry.register(new Ae2MemoryCardWrenchHandler());
+            UseHandlerRegistry.register(new Ae2MemoryCardUseHandler());
             UseHandlerRegistry.register(new AE2RenameUseHandler());
         }
         if (ModList.get().isLoaded("extendedae")) {
