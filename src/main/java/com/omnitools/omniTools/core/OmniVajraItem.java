@@ -4,21 +4,29 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.component.Tool;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CampfireBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.neoforged.neoforge.common.ItemAbilities;
@@ -166,5 +174,40 @@ public class OmniVajraItem extends Item {
 
         return InteractionResult.sidedSuccess(level.isClientSide);
     }
-    
+
+    @Override
+    public boolean mineBlock(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity entity) {
+        if (!(level instanceof ServerLevel serverLevel)) {
+            return true; // 客户端什么都不做
+        }
+
+        if (entity instanceof Player player) {
+
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+
+            List<ItemStack> drops = Block.getDrops(
+                    state,
+                    serverLevel,
+                    pos,
+                    blockEntity,
+                    player,
+                    stack
+            );
+
+            for (ItemStack drop : drops) {
+                if (!player.getInventory().add(drop)) {
+                    player.drop(drop, false);
+                }
+            }
+
+            // 移除方块（不生成掉落物）
+            level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
+
+
+            return true;
+        }
+
+        return super.mineBlock(stack, level, state, pos, entity);
+    }
+
 }
