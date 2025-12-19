@@ -28,5 +28,11 @@ public class NetworkHandler {
                 .decoder(SyncToolModePacket::decode)
                 .consumerNetworkThread(SyncToolModePacket::handle)
                 .add();
+
+        CHANNEL.messageBuilder(SyncVajraMiningSpeedPacket.class, nextId(), NetworkDirection.PLAY_TO_SERVER)
+                .encoder(SyncVajraMiningSpeedPacket::encode)
+                .decoder(SyncVajraMiningSpeedPacket::decode)
+                .consumerNetworkThread(SyncVajraMiningSpeedPacket::handle)
+                .add();
     }
 }

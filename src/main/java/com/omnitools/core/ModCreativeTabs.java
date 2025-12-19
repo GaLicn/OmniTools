@@ -20,6 +20,7 @@ public class ModCreativeTabs {
                     .icon(() -> new ItemStack(ModItems.OMNI_WRENCH.get()))
                     .displayItems((params, output) -> {
                         output.accept(ModItems.OMNI_WRENCH.get());
+                        output.accept(ModItems.OMNI_VAJRA.get());
                     })
                     .build()
     );

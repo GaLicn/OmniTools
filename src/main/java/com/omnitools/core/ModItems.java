@@ -16,6 +16,11 @@ public class ModItems {
             () -> new OmniToolItem(new Item.Properties().stacksTo(1))
     );
 
+    public static final RegistryObject<OmniVajraItem> OMNI_VAJRA = ITEMS.register(
+            "omni_vajra",
+            () -> new OmniVajraItem(new Item.Properties().stacksTo(1))
+    );
+
     public static void register(IEventBus modEventBus) {
         ITEMS.register(modEventBus);
     }
