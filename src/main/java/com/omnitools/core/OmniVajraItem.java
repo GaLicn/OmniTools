@@ -143,11 +143,6 @@ public class OmniVajraItem extends Item {
         ItemStack stack = context.getItemInHand();
         Player player = context.getPlayer();
 
-        if (player != null && player.isShiftKeyDown()) {
-            toggleAutoPickup(stack, level, player);
-            return InteractionResult.sidedSuccess(level.isClientSide);
-        }
-
         BlockState modifiedState = null;
         SoundEvent sound = null;
         int levelEventId = -1;

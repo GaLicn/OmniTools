@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "minecraft:nether_star"
+    },
+    "b": {
+      "item": "minecraft:lodestone"
+    },
+    "c": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "i": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "pattern": [
+    "ai ",
+    "ibi",
+    " ic"
+  ],
+  "result": {
+    "item": "omnitools:omni_vajra"
+  },
+  "show_notification": true
+}
