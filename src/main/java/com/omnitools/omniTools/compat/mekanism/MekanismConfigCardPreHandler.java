@@ -16,6 +16,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import org.jetbrains.annotations.Nullable;
 
@@ -51,7 +52,8 @@ public class MekanismConfigCardPreHandler {
             return;
         }
 
-        WrenchContext context = new WrenchContext(level, pos, face, player, stack);
+        Vec3 clickLocation = event.getHitVec() != null ? event.getHitVec().getLocation() : Vec3.atCenterOf(pos);
+        WrenchContext context = new WrenchContext(level, pos, face, clickLocation, player, stack);
         InteractionResult result = WrenchHandlerRegistry.handle(context);
         if (result.consumesAction()) {
             event.setCanceled(true);

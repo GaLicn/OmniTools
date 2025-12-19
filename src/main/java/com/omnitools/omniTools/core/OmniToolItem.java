@@ -115,6 +115,7 @@ public class OmniToolItem extends Item {
                     level,
                     pos,
                     face,
+                    context.getClickLocation(),
                     player,
                     context.getItemInHand()
             );

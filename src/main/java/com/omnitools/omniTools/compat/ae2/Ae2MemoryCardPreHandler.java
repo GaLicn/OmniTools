@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 
@@ -35,7 +36,11 @@ public class Ae2MemoryCardPreHandler {
 
         BlockPos pos = event.getPos();
         Direction face = event.getFace();
-        WrenchContext ctx = new WrenchContext(level, pos, face, player, stack);
+        if (event.getHitVec() == null) {
+            return;
+        }
+        Vec3 clickLocation = event.getHitVec().getLocation();
+        WrenchContext ctx = new WrenchContext(level, pos, face, clickLocation, player, stack);
         InteractionResult result = WrenchHandlerRegistry.handle(ctx);
         if (result.consumesAction()) {
             event.setCanceled(true);
