@@ -10,6 +10,9 @@ import com.omnitools.omniTools.compat.extendedae.ExtendedAEWirelessWrenchHandler
 import com.omnitools.omniTools.compat.immersiveengineering.IEWrenchHandler;
 import com.omnitools.omniTools.compat.mebeamformer.MEBeamFormerUseHandler;
 import com.omnitools.omniTools.compat.mebeamformer.MEBeamFormerWrenchHandler;
+import com.omnitools.omniTools.compat.mekanism.MekanismConfigCardPreHandler;
+import com.omnitools.omniTools.compat.mekanism.MekanismConfigCardUseHandler;
+import com.omnitools.omniTools.compat.mekanism.MekanismConfigCardWrenchHandler;
 import com.omnitools.omniTools.compat.mekanism.MekanismTransmitterWrenchHandler;
 import com.omnitools.omniTools.compat.powah.PowahLinkWrenchHandler;
 import com.omnitools.omniTools.compat.draconicevolution.DraconicLinkWrenchHandler;
@@ -26,7 +29,10 @@ public class CompatBootstrap {
             WrenchHandlerRegistry.register(new IEWrenchHandler());
         }
         if (ModList.get().isLoaded("mekanism")) {
+            NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, MekanismConfigCardPreHandler::onRightClickBlock);
             WrenchHandlerRegistry.register(new MekanismTransmitterWrenchHandler());
+            WrenchHandlerRegistry.register(new MekanismConfigCardWrenchHandler());
+            UseHandlerRegistry.register(new MekanismConfigCardUseHandler());
         }
         if (ModList.get().isLoaded("ae2")) {
             UseHandlerRegistry.register(new AE2RenameUseHandler());
