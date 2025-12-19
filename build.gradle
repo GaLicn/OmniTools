@@ -206,7 +206,7 @@ dependencies {
     //gregtech
     implementation fg.deobf("curse.maven:configuration-444699:5840405")
     implementation fg.deobf("curse.maven:ldlib-626676:7270711")
-    compileOnly fg.deobf("curse.maven:gregtechceu-modern-890405:7262157")
+    implementation fg.deobf("curse.maven:gregtechceu-modern-890405:7262157")
 
 
     implementation fg.deobf("curse.maven:curios-309927:6418456")
