@@ -3,9 +3,11 @@ package com.omnitools.omniTools.client;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.omnitools.omniTools.compat.entangled.EntangledHighlightHandler;
 import com.omnitools.omniTools.core.OmniToolItem;
+import com.omnitools.omniTools.core.OmniVajraItem;
 import com.omnitools.omniTools.core.ModItems;
 import com.omnitools.omniTools.core.ToolMode;
 import com.omnitools.omniTools.network.SyncToolModePacket;
+import com.omnitools.omniTools.network.SyncVajraSilkTouchPacket;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -29,6 +31,7 @@ import org.lwjgl.glfw.GLFW;
 @EventBusSubscriber(modid = "omnitools", value = Dist.CLIENT)
 public class ClientEvents {
     public static KeyMapping CYCLE_MODE_KEYBIND;
+    public static KeyMapping TOGGLE_VAJRA_SILK_TOUCH_KEYBIND;
 
     // 在客户端初始化时注册模型属性
     @SubscribeEvent
@@ -68,6 +71,14 @@ public class ClientEvents {
                 "key.categories.omnitools"
         );
         event.register(CYCLE_MODE_KEYBIND);
+
+        TOGGLE_VAJRA_SILK_TOUCH_KEYBIND = new KeyMapping(
+                "key.omnitools.vajra_toggle_silk_touch",
+                InputConstants.Type.KEYSYM,
+                GLFW.GLFW_KEY_Y,
+                "key.categories.omnitools"
+        );
+        event.register(TOGGLE_VAJRA_SILK_TOUCH_KEYBIND);
     }
 
     @EventBusSubscriber(modid = "omnitools", value = Dist.CLIENT)
@@ -96,6 +107,23 @@ public class ClientEvents {
                                     Component.translatable(newMode.getTranslationKey())
                             ),
                             true
+                        );
+                    }
+                }
+
+                while (TOGGLE_VAJRA_SILK_TOUCH_KEYBIND != null && TOGGLE_VAJRA_SILK_TOUCH_KEYBIND.consumeClick()) {
+                    ItemStack mainHandStack = player.getMainHandItem();
+                    if (mainHandStack.getItem() == ModItems.OMNI_VAJRA.get()) {
+                        boolean enabled = !OmniVajraItem.isSilkTouchEnabled(mainHandStack, player.level());
+                        OmniVajraItem.setSilkTouchEnabled(mainHandStack, player.level(), enabled);
+                        PacketDistributor.sendToServer(new SyncVajraSilkTouchPacket(enabled));
+
+                        player.displayClientMessage(
+                                Component.translatable(
+                                        "message.omnitools.vajra_silk_touch",
+                                        Component.translatable(enabled ? "message.omnitools.vajra_silk_touch_on" : "message.omnitools.vajra_silk_touch_off")
+                                ),
+                                true
                         );
                     }
                 }

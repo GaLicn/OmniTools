@@ -11,6 +11,9 @@ import com.omnitools.omniTools.compat.extendedae.ExtendedAERenamePreHandler;
 import com.omnitools.omniTools.compat.extendedae.ExtendedAEWirelessUseHandler;
 import com.omnitools.omniTools.compat.extendedae.ExtendedAEWirelessWrenchHandler;
 import com.omnitools.omniTools.compat.immersiveengineering.IEWrenchHandler;
+import com.omnitools.omniTools.compat.industrialforegoing.IndustrialForegoingSettingsCopierPreHandler;
+import com.omnitools.omniTools.compat.industrialforegoing.IndustrialForegoingSettingsCopierUseHandler;
+import com.omnitools.omniTools.compat.industrialforegoing.IndustrialForegoingSettingsCopierWrenchHandler;
 import com.omnitools.omniTools.compat.mebeamformer.MEBeamFormerUseHandler;
 import com.omnitools.omniTools.compat.mebeamformer.MEBeamFormerWrenchHandler;
 import com.omnitools.omniTools.compat.mekanism.MekanismConfigCardPreHandler;
@@ -36,6 +39,11 @@ public class CompatBootstrap {
             WrenchHandlerRegistry.register(new MekanismTransmitterWrenchHandler());
             WrenchHandlerRegistry.register(new MekanismConfigCardWrenchHandler());
             UseHandlerRegistry.register(new MekanismConfigCardUseHandler());
+        }
+        if (ModList.get().isLoaded("industrialforegoing")) {
+            NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, IndustrialForegoingSettingsCopierPreHandler::onRightClickBlock);
+            WrenchHandlerRegistry.register(new IndustrialForegoingSettingsCopierWrenchHandler());
+            UseHandlerRegistry.register(new IndustrialForegoingSettingsCopierUseHandler());
         }
         if (ModList.get().isLoaded("ae2")) {
             NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, Ae2MemoryCardPreHandler::onRightClickBlock);

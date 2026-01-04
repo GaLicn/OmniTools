@@ -23,5 +23,11 @@ public class NetworkHandler {
                 SyncVajraMiningSpeedPacket.CODEC,
                 (packet, context) -> packet.handle(context)
         );
+
+        registrar.playToServer(
+                SyncVajraSilkTouchPacket.TYPE,
+                SyncVajraSilkTouchPacket.CODEC,
+                (packet, context) -> packet.handle(context)
+        );
     }
 }

@@ -6,6 +6,7 @@ import java.util.Set;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
@@ -25,6 +26,8 @@ import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.component.Tool;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -134,6 +137,58 @@ public class OmniVajraItem extends Item {
                 ),
                 true
         );
+    }
+
+    public static boolean isSilkTouchEnabled(ItemStack stack, Level level) {
+        if (stack.isEmpty() || level == null) {
+            return false;
+        }
+        var enchantments = stack.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY);
+        if (enchantments.isEmpty()) {
+            return false;
+        }
+        var enchantmentRegistry = level.registryAccess().registryOrThrow(Registries.ENCHANTMENT);
+        int levelValue = enchantments.getLevel(enchantmentRegistry.getHolderOrThrow(Enchantments.SILK_TOUCH));
+        return levelValue > 0;
+    }
+
+    public static void setSilkTouchEnabled(ItemStack stack, Level level, boolean enabled) {
+        if (stack.isEmpty() || level == null) {
+            return;
+        }
+        var enchantments = stack.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY);
+        var enchantmentRegistry = level.registryAccess().registryOrThrow(Registries.ENCHANTMENT);
+        var silkTouch = enchantmentRegistry.getHolderOrThrow(Enchantments.SILK_TOUCH);
+
+        ItemEnchantments.Mutable mutable;
+        if (enabled) {
+            mutable = new ItemEnchantments.Mutable(enchantments);
+            mutable.set(silkTouch, 1);
+        } else {
+            if (enchantments.isEmpty()) {
+                stack.remove(DataComponents.ENCHANTMENTS);
+                return;
+            }
+            mutable = new ItemEnchantments.Mutable(ItemEnchantments.EMPTY);
+            for (var entry : enchantments.entrySet()) {
+                if (!entry.getKey().equals(silkTouch)) {
+                    mutable.set(entry.getKey(), entry.getValue());
+                }
+            }
+        }
+
+        var result = mutable.toImmutable();
+        if (result.isEmpty()) {
+            stack.remove(DataComponents.ENCHANTMENTS);
+        } else {
+            stack.set(DataComponents.ENCHANTMENTS, result);
+        }
+    }
+
+    public static boolean toggleSilkTouch(ItemStack stack, Level level) {
+        boolean enabled = !isSilkTouchEnabled(stack, level);
+        setSilkTouchEnabled(stack, level, enabled);
+        return enabled;
     }
 
     @Override

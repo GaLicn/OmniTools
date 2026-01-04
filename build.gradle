@@ -168,6 +168,10 @@ dependencies {
     implementation "curse.maven:draconic-evolution-223565:7284028"
     implementation "curse.maven:brandons-core-231382:7130990"
     implementation "curse.maven:codechicken-lib-1-8-242818:7281427"
+
+    //工业先锋
+    implementation "curse.maven:industrial-foregoing-266515:7366838"
+    implementation "curse.maven:titanium-287342:6875285"
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
