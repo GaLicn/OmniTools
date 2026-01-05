@@ -1,0 +1,26 @@
+{
+  "item.omnitools.omni_wrench": "オムニ • レンチ",
+  "item.omnitools.omni_vajra": "オムニ • ヴァジュラ",
+  "itemGroup.omnitools": "OmniTools",
+  "key.omnitools.cycle_mode": "ツールのモード切り替え",
+  "key.categories.gameplay": "ゲームプレイ",
+  "key.categories.omnitools": "OmniTools 設定",
+  "toolmode.omnitools.wrench": "レンチモード",
+  "toolmode.omnitools.link": "リンクモード[レンチのタグなし]",
+  "toolmode.omnitools.rename": "改名モード[クォーツナイフ]",
+  "toolmode.omnitools.configuration": "設定モード",
+  "message.omnitools.mode_switched": "§6[OmniTool] §rモードを§e%s§rに切り替えました",
+  "message.omnitools.vajra_mining_speed": "§6[OmniTool] §r採掘速度: §e%s",
+  "message.omnitools.vajra_pickup_mode": "§6[OmniTool] §r自動回収: §e%s",
+  "message.omnitools.vajra_pickup_mode_on": "オン",
+  "message.omnitools.vajra_pickup_mode_off": "オフ",
+
+  "tooltip.omnitools.omni_wrench.main": "複数のModのレンチの代替となる万能ツール。",
+  "tooltip.omnitools.omni_wrench.controls": "操作設定で設定したキー (デフォルト: 左Alt) でモードを切り替えます。",
+  "omnitools.compat.draconicevolution": "[OmniTools] Draconic Evolution",
+  "omnitools.compat.extendedae": "[OmniTools] ExtendedAE",
+  "omnitools.compat.powah": "[OmniTools] Powah",
+  "omnitools.compat.entangled": "[OmniTools] Entangled",
+  "omnitools.compat.mekanism": "[OmniTools] Mekanism",
+  "omnitools.compat.ae2": "[OmniTools] Applied Energistics 2"
+}
