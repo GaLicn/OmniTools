@@ -15,6 +15,7 @@ import com.omnitools.compat.mebeamformer.MEBeamFormerUseHandler;
 import com.omnitools.compat.mebeamformer.MEBeamFormerWrenchHandler;
 import com.omnitools.compat.mekanism.MekanismTransmitterWrenchHandler;
 import com.omnitools.compat.powah.PowahLinkWrenchHandler;
+import com.omnitools.compat.voltaic.VoltaicWrenchHandler;
 import com.omnitools.compat.draconicevolution.DraconicLinkWrenchHandler;
 import com.omnitools.compat.draconicevolution.DraconicLinkUseHandler;
 import com.omnitools.core.UseHandlerRegistry;
@@ -57,6 +58,11 @@ public class CompatBootstrap {
         // Powah
         if (ModList.get().isLoaded("powah")) {
             WrenchHandlerRegistry.register(new PowahLinkWrenchHandler());
+        }
+
+        // Voltaic
+        if (ModList.get().isLoaded("voltaic")) {
+            WrenchHandlerRegistry.register(new VoltaicWrenchHandler());
         }
 
         // Botania

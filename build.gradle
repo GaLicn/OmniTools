@@ -179,8 +179,6 @@ dependencies {
     implementation fg.deobf("curse.maven:mekanism-268560:6552911")
     //implementation fg.deobf("curse.maven:jade-324717:6855440")
     implementation fg.deobf("curse.maven:cloth-config-348521:5729105")
-    implementation fg.deobf("curse.maven:create-328085:7178761")
-    implementation fg.deobf("curse.maven:immersive-engineering-231951:6206989")
     implementation fg.deobf("curse.maven:pipez-443900:6945379")
     implementation fg.deobf("curse.maven:powah-rearchitected-633483:6828054")
     implementation fg.deobf("curse.maven:ender-io-64578:7183516")
@@ -193,23 +191,30 @@ dependencies {
     implementation fg.deobf("curse.maven:ex-pattern-provider-892005:7248944")
     implementation fg.deobf("curse.maven:architectury-api-419699:5137938")
 
+
+    compileOnly fg.deobf("curse.maven:create-328085:7178761")
+    compileOnly fg.deobf("curse.maven:immersive-engineering-231951:6206989")
     //植物魔法
-    implementation fg.deobf("curse.maven:botania-225643:6870713")
-    implementation fg.deobf("curse.maven:patchouli-306770:6164575")
-    implementation fg.deobf("curse.maven:curios-309927:6418456")
+    compileOnly fg.deobf("curse.maven:botania-225643:6870713")
+    compileOnly fg.deobf("curse.maven:patchouli-306770:6164575")
+    compileOnly fg.deobf("curse.maven:curios-309927:6418456")
 
     //龙之研究
-    implementation fg.deobf("curse.maven:draconic-evolution-223565:6793843")
-    implementation fg.deobf("curse.maven:brandons-core-231382:5422013")
-    implementation fg.deobf("curse.maven:codechicken-lib-1-8-242818:5753868")
+    compileOnly fg.deobf("curse.maven:draconic-evolution-223565:6793843")
+    compileOnly fg.deobf("curse.maven:brandons-core-231382:5422013")
+    compileOnly fg.deobf("curse.maven:codechicken-lib-1-8-242818:5753868")
 
     //gregtech
-    implementation fg.deobf("curse.maven:configuration-444699:5840405")
-    implementation fg.deobf("curse.maven:ldlib-626676:7270711")
-    implementation fg.deobf("curse.maven:gregtechceu-modern-890405:7262157")
+    compileOnly fg.deobf("curse.maven:configuration-444699:5840405")
+    compileOnly fg.deobf("curse.maven:ldlib-626676:7270711")
+    compileOnly fg.deobf("curse.maven:gregtechceu-modern-890405:7262157")
 
 
     implementation fg.deobf("curse.maven:curios-309927:6418456")
+
+    //voltaic
+    implementation fg.deobf("curse.maven:voltaic-api-1237904:7397504")
+    implementation fg.deobf("curse.maven:electrodynamics-316867:7427041")
 
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
