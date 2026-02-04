@@ -21,6 +21,7 @@ import com.omnitools.omniTools.compat.mekanism.MekanismConfigCardUseHandler;
 import com.omnitools.omniTools.compat.mekanism.MekanismConfigCardWrenchHandler;
 import com.omnitools.omniTools.compat.mekanism.MekanismTransmitterWrenchHandler;
 import com.omnitools.omniTools.compat.powah.PowahLinkWrenchHandler;
+import com.omnitools.omniTools.compat.voltaic.VoltaicWrenchHandler;
 import com.omnitools.omniTools.compat.draconicevolution.DraconicLinkWrenchHandler;
 import com.omnitools.omniTools.compat.draconicevolution.DraconicLinkUseHandler;
 import com.omnitools.omniTools.core.UseHandlerRegistry;
@@ -70,6 +71,9 @@ public class CompatBootstrap {
         if (ModList.get().isLoaded("entangled")) {
             WrenchHandlerRegistry.register(new EntangledBinderWrenchHandler());
             UseHandlerRegistry.register(new EntangledBinderUseHandler());
+        }
+        if (ModList.get().isLoaded("voltaic")) {
+            WrenchHandlerRegistry.register(new VoltaicWrenchHandler());
         }
         if (ModList.get().isLoaded("create")) {
             NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, CreateValueSettingsPreHandler::onRightClickBlock);

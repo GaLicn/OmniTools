@@ -153,9 +153,9 @@ dependencies {
     //PIPEZ
     implementation "curse.maven:pipez-443900:5656728"
     //沉浸工程
-    implementation "curse.maven:immersive-engineering-231951:6733669"
+    compileOnly "curse.maven:immersive-engineering-231951:6733669"
     //create
-    implementation "curse.maven:create-328085:7178775"
+    compileOnly "curse.maven:create-328085:7178775"
     //me光束
     implementation "curse.maven:me-beam-former-1351545:7267509"
     //powah
@@ -165,13 +165,13 @@ dependencies {
     //ender io
     implementation "curse.maven:ender-io-64578:7204349"
     //龙之研究
-    implementation "curse.maven:draconic-evolution-223565:7284028"
-    implementation "curse.maven:brandons-core-231382:7130990"
-    implementation "curse.maven:codechicken-lib-1-8-242818:7281427"
+    compileOnly "curse.maven:draconic-evolution-223565:7284028"
+    compileOnly "curse.maven:brandons-core-231382:7130990"
+    compileOnly "curse.maven:codechicken-lib-1-8-242818:7281427"
+    //Voltaic
+    implementation "curse.maven:voltaic-api-1237904:7397445"
+    implementation "curse.maven:electrodynamics-316867:7427042"
 
-    //工业先锋
-    implementation "curse.maven:industrial-foregoing-266515:7366838"
-    implementation "curse.maven:titanium-287342:6875285"
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
