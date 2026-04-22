@@ -321,4 +321,14 @@ public class OmniVajraItem extends Item {
         return super.mineBlock(stack, level, state, pos, entity);
     }
 
+    @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public int getEnchantmentValue() {
+        return Tiers.NETHERITE.getEnchantmentValue();
+    }
+
 }
