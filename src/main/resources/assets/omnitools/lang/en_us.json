@@ -29,5 +29,7 @@
   "omnitools.compat.powah": "[OmniTools] Powah",
   "omnitools.compat.entangled": "[OmniTools] Entangled",
   "omnitools.compat.mekanism": "[OmniTools] Mekanism",
-  "omnitools.compat.ae2": "[OmniTools] Applied Energistics 2"
+  "omnitools.compat.ae2": "[OmniTools] Applied Energistics 2",
+  "omnitools.compat.logisticsnetworks": "[OmniTools] Logistics Networks",
+  "message.omnitools.logisticsnetworks.clipboard_cleared": "Cleared stored logistics node settings"
 }

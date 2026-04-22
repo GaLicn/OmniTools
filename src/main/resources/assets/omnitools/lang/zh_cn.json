@@ -27,5 +27,7 @@
   "omnitools.compat.powah": "§6[OmniTools] §rPowah",
   "omnitools.compat.entangled": "§6[OmniTools] §r纠缠方块",
   "omnitools.compat.mekanism": "§6[OmniTools] §rMekanism",
-  "omnitools.compat.ae2": "§6[OmniTools] §r应用能源2"
+  "omnitools.compat.ae2": "§6[OmniTools] §r应用能源2",
+  "omnitools.compat.logisticsnetworks": "§6[OmniTools] §r物流网络",
+  "message.omnitools.logisticsnetworks.clipboard_cleared": "已清空物流节点配置缓存"
 }

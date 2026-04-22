@@ -14,6 +14,10 @@ import com.omnitools.omniTools.compat.immersiveengineering.IEWrenchHandler;
 import com.omnitools.omniTools.compat.industrialforegoing.IndustrialForegoingSettingsCopierPreHandler;
 import com.omnitools.omniTools.compat.industrialforegoing.IndustrialForegoingSettingsCopierUseHandler;
 import com.omnitools.omniTools.compat.industrialforegoing.IndustrialForegoingSettingsCopierWrenchHandler;
+import com.omnitools.omniTools.compat.logisticsnetworks.LogisticsNetworksClipboardUseHandler;
+import com.omnitools.omniTools.compat.logisticsnetworks.LogisticsNetworksClipboardWrenchHandler;
+import com.omnitools.omniTools.compat.logisticsnetworks.LogisticsNetworksNodePreHandler;
+import com.omnitools.omniTools.compat.logisticsnetworks.LogisticsNetworksNodeWrenchHandler;
 import com.omnitools.omniTools.compat.mebeamformer.MEBeamFormerUseHandler;
 import com.omnitools.omniTools.compat.mebeamformer.MEBeamFormerWrenchHandler;
 import com.omnitools.omniTools.compat.mekanism.MekanismConfigCardPreHandler;
@@ -34,6 +38,12 @@ public class CompatBootstrap {
     public static void registerHandlers() {
         if (ModList.get().isLoaded("immersiveengineering")) {
             WrenchHandlerRegistry.register(new IEWrenchHandler());
+        }
+        if (ModList.get().isLoaded("logisticsnetworks")) {
+            NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, LogisticsNetworksNodePreHandler::onRightClickBlock);
+            WrenchHandlerRegistry.register(new LogisticsNetworksNodeWrenchHandler());
+            WrenchHandlerRegistry.register(new LogisticsNetworksClipboardWrenchHandler());
+            UseHandlerRegistry.register(new LogisticsNetworksClipboardUseHandler());
         }
         if (ModList.get().isLoaded("mekanism")) {
             NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, MekanismConfigCardPreHandler::onRightClickBlock);
