@@ -172,6 +172,9 @@ dependencies {
     implementation "curse.maven:voltaic-api-1237904:7397445"
     implementation "curse.maven:electrodynamics-316867:7427042"
 
+    //工业先锋
+    implementation "curse.maven:industrial-foregoing-266515:7600395"
+    implementation "curse.maven:titanium-287342:7951516"
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
