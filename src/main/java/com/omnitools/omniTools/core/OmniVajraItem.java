@@ -9,7 +9,6 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -29,10 +28,7 @@ import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CampfireBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.neoforged.neoforge.common.ItemAbilities;
@@ -288,34 +284,12 @@ public class OmniVajraItem extends Item {
         if (!isAutoPickupEnabled(stack)) {
             return super.mineBlock(stack, level, state, pos, entity);
         }
-        if (!(level instanceof ServerLevel serverLevel)) {
-            return true; // 客户端什么都不做
+        if (level.isClientSide) {
+            return true;
         }
 
         if (entity instanceof Player player) {
-
-            BlockEntity blockEntity = level.getBlockEntity(pos);
-
-            List<ItemStack> drops = Block.getDrops(
-                    state,
-                    serverLevel,
-                    pos,
-                    blockEntity,
-                    player,
-                    stack
-            );
-
-            for (ItemStack drop : drops) {
-                if (!player.getInventory().add(drop)) {
-                    player.drop(drop, false);
-                }
-            }
-
-            // 移除方块（不生成掉落物）
-            level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
-
-
-            return true;
+            VajraAutoPickupHandler.markAutoPickup(player, pos);
         }
 
         return super.mineBlock(stack, level, state, pos, entity);

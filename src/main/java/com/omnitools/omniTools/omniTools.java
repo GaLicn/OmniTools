@@ -7,11 +7,13 @@ import com.mojang.logging.LogUtils;
 import com.omnitools.omniTools.compat.CompatBootstrap;
 import com.omnitools.omniTools.core.ModCreativeTabs;
 import com.omnitools.omniTools.core.ModItems;
+import com.omnitools.omniTools.core.VajraAutoPickupHandler;
 import com.omnitools.omniTools.data.OmniToolsDataGenerator;
 import com.omnitools.omniTools.network.NetworkHandler;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.common.NeoForge;
 
 @Mod(omniTools.MODID)
 public class omniTools {
@@ -26,5 +28,6 @@ public class omniTools {
         NetworkHandler.register(modEventBus);
         CompatBootstrap.registerHandlers();
         modEventBus.addListener(OmniToolsDataGenerator::gatherData);
+        NeoForge.EVENT_BUS.addListener(VajraAutoPickupHandler::onEntityJoinLevel);
     }
 }
