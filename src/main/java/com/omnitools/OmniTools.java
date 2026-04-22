@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import com.omnitools.compat.CompatBootstrap;
 import com.omnitools.core.ModCreativeTabs;
 import com.omnitools.core.ModItems;
+import com.omnitools.core.VajraAutoPickupHandler;
 import com.omnitools.network.NetworkHandler;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -31,6 +32,7 @@ public class OmniTools {
         modEventBus.addListener(this::commonSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.addListener(VajraAutoPickupHandler::onEntityJoinLevel);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

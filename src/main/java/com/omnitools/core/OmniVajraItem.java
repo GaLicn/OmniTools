@@ -19,19 +19,17 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CampfireBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.common.util.Lazy;
 
-import java.util.List;
 import java.util.Set;
 
 public class OmniVajraItem extends Item {
@@ -212,23 +210,34 @@ public class OmniVajraItem extends Item {
         if (!isAutoPickupEnabled(stack)) {
             return super.mineBlock(stack, level, state, pos, entity);
         }
-        if (!(level instanceof net.minecraft.server.level.ServerLevel serverLevel)) {
+        if (level.isClientSide) {
             return true;
         }
 
         if (entity instanceof Player player) {
-            BlockEntity blockEntity = level.getBlockEntity(pos);
-            List<ItemStack> drops = Block.getDrops(state, serverLevel, pos, blockEntity, player, stack);
-            for (ItemStack drop : drops) {
-                if (!player.getInventory().add(drop)) {
-                    player.drop(drop, false);
-                }
-            }
-            level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
-            return true;
+            VajraAutoPickupHandler.markAutoPickup(player, pos);
         }
 
         return super.mineBlock(stack, level, state, pos, entity);
+    }
+
+    @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public int getEnchantmentValue() {
+        return Tiers.NETHERITE.getEnchantmentValue();
+    }
+
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+        EnchantmentCategory category = enchantment.category;
+        return category == EnchantmentCategory.DIGGER
+                || category == EnchantmentCategory.BREAKABLE
+                || category == EnchantmentCategory.VANISHABLE
+                || super.canApplyAtEnchantingTable(stack, enchantment);
     }
 
     @Override
