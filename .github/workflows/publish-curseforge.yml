@@ -56,6 +56,7 @@ jobs:
     outputs:
       artifact_path: ${{ steps.metadata.outputs.artifact_path }}
       artifact_name: ${{ steps.metadata.outputs.artifact_name }}
+      mod_loader: ${{ steps.metadata.outputs.mod_loader }}
       mod_name: ${{ steps.metadata.outputs.mod_name }}
       mod_version: ${{ steps.metadata.outputs.mod_version }}
       mc_version: ${{ steps.metadata.outputs.mc_version }}
@@ -82,6 +83,7 @@ jobs:
         shell: bash
         run: |
           mod_id="$(grep '^mod_id=' gradle.properties | cut -d'=' -f2-)"
+          mod_loader="$(grep '^mod_loader=' gradle.properties | cut -d'=' -f2-)"
           mod_name="$(grep '^mod_name=' gradle.properties | cut -d'=' -f2-)"
           mod_version="$(grep '^mod_version=' gradle.properties | cut -d'=' -f2-)"
           mc_version="$(grep '^minecraft_version=' gradle.properties | cut -d'=' -f2-)"
@@ -92,6 +94,7 @@ jobs:
           {
             echo "artifact_path=build/libs/${artifact_name}"
             echo "artifact_name=${artifact_name}"
+            echo "mod_loader=${mod_loader}"
             echo "mod_name=${mod_name}"
             echo "mod_version=${mod_version}"
             echo "mc_version=${mc_version}"
@@ -159,7 +162,7 @@ jobs:
           curseforge-id: ${{ vars.CURSEFORGE_PROJECT_ID }}
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
           loaders: |
-            neoforge
+            ${{ needs.build.outputs.mod_loader }}
           game-versions: |
             ${{ needs.build.outputs.mc_version }}
 
