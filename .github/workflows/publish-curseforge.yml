@@ -174,3 +174,4 @@ jobs:
             neoforge
           game-versions: |
             ${{ needs.build.outputs.mc_version }}
+
