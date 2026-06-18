@@ -87,8 +87,21 @@ jobs:
           mod_name="$(grep '^mod_name=' gradle.properties | cut -d'=' -f2-)"
           mod_version="$(grep '^mod_version=' gradle.properties | cut -d'=' -f2-)"
           mc_version="$(grep '^minecraft_version=' gradle.properties | cut -d'=' -f2-)"
+
+          case "${mod_loader}" in
+            neoforge)
+              loader_display_name="NeoForge"
+              ;;
+            forge)
+              loader_display_name="Forge"
+              ;;
+            *)
+              loader_display_name="${mod_loader}"
+              ;;
+          esac
+
           artifact_name="${mod_id}-${mod_version}.jar"
-          release_name="${mod_name} ${mod_version} [NeoForge ${mc_version}]"
+          release_name="${mod_name} ${mod_version} [${loader_display_name} ${mc_version}]"
           release_version="${mod_version}"
 
           {
