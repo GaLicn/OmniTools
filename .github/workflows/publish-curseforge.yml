@@ -1,8 +1,7 @@
 name: Release CurseForge
 
 on:
-  release:
-    types: [published]
+  push:
   workflow_dispatch:
     inputs:
       version_type:
@@ -23,8 +22,46 @@ permissions:
   contents: read
 
 jobs:
+  prepare:
+    name: Check Trigger
+    runs-on: ubuntu-latest
+    outputs:
+      should_publish: ${{ steps.check.outputs.should_publish }}
+      release_type: ${{ steps.check.outputs.release_type }}
+      changelog: ${{ steps.check.outputs.changelog }}
+
+    steps:
+      - name: Check commit message
+        id: check
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            should_publish="true"
+            release_type="${{ inputs.version_type }}"
+            changelog_content="${{ inputs.changelog }}"
+          else
+            commit_message="${{ github.event.head_commit.message }}"
+            if [[ "${commit_message}" =~ ^更新.+版本$ ]]; then
+              should_publish="true"
+            else
+              should_publish="false"
+            fi
+            release_type="release"
+            changelog_content="${commit_message}"
+          fi
+
+          {
+            echo "should_publish=${should_publish}"
+            echo "release_type=${release_type}"
+            echo "changelog<<EOF"
+            echo "${changelog_content}"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
   build:
     name: Build
+    needs: prepare
+    if: needs.prepare.outputs.should_publish == 'true'
     runs-on: ubuntu-latest
     outputs:
       artifact_path: ${{ steps.metadata.outputs.artifact_path }}
@@ -34,7 +71,7 @@ jobs:
       mc_version: ${{ steps.metadata.outputs.mc_version }}
       release_name: ${{ steps.metadata.outputs.release_name }}
       release_version: ${{ steps.metadata.outputs.release_version }}
-      release_type: ${{ steps.metadata.outputs.release_type }}
+      release_type: ${{ needs.prepare.outputs.release_type }}
       changelog: ${{ steps.changelog.outputs.content }}
 
     steps:
@@ -60,18 +97,7 @@ jobs:
           mc_version="$(grep '^minecraft_version=' gradle.properties | cut -d'=' -f2-)"
           artifact_name="${mod_id}-${mod_version}.jar"
           release_name="${mod_name} ${mod_version} [NeoForge ${mc_version}]"
-
-          if [[ "${{ github.event_name }}" == "release" ]]; then
-            release_version="${{ github.event.release.tag_name }}"
-            if [[ "${{ github.event.release.prerelease }}" == "true" ]]; then
-              release_type="beta"
-            else
-              release_type="release"
-            fi
-          else
-            release_version="${mod_version}"
-            release_type="${{ inputs.version_type }}"
-          fi
+          release_version="${mod_version}"
 
           {
             echo "artifact_path=build/libs/${artifact_name}"
@@ -81,18 +107,14 @@ jobs:
             echo "mc_version=${mc_version}"
             echo "release_name=${release_name}"
             echo "release_version=${release_version}"
-            echo "release_type=${release_type}"
           } >> "$GITHUB_OUTPUT"
 
       - name: Resolve changelog
         id: changelog
         shell: bash
         run: |
-          if [[ "${{ github.event_name }}" == "workflow_dispatch" && -n "${{ inputs.changelog }}" ]]; then
-            changelog_content="${{ inputs.changelog }}"
-          elif [[ "${{ github.event_name }}" == "release" ]]; then
-            changelog_content="${{ github.event.release.body }}"
-          else
+          changelog_content="${{ needs.prepare.outputs.changelog }}"
+          if [[ -z "${changelog_content}" ]]; then
             changelog_content="$(cat CHANGELOG.md)"
           fi
           {
