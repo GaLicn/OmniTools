@@ -1,3 +1,15 @@
+# OmniTools 1.2.2
+
+## 中文
+- 适配 Logistics Network 模组
+- 金刚杵支持附魔
+- 优化金刚杵的自动拾取功能
+
+## English
+- Added Logistics Network mod compatibility
+- Added enchantment support for Vajra
+- Improved Vajra auto pickup behavior
+
 # OmniTools 1.2.1
 
 ## 中文

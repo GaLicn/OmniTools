@@ -13,10 +13,6 @@ on:
           - release
           - beta
           - alpha
-      changelog:
-        description: Optional changelog override for manual runs
-        required: false
-        type: string
 
 permissions:
   contents: read
@@ -28,7 +24,6 @@ jobs:
     outputs:
       should_publish: ${{ steps.check.outputs.should_publish }}
       release_type: ${{ steps.check.outputs.release_type }}
-      changelog: ${{ steps.check.outputs.changelog }}
 
     steps:
       - name: Check commit message
@@ -38,7 +33,6 @@ jobs:
           if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
             should_publish="true"
             release_type="${{ inputs.version_type }}"
-            changelog_content="${{ inputs.changelog }}"
           else
             commit_message="${{ github.event.head_commit.message }}"
             if [[ "${commit_message}" =~ ^更新.+版本$ ]]; then
@@ -47,15 +41,11 @@ jobs:
               should_publish="false"
             fi
             release_type="release"
-            changelog_content="${commit_message}"
           fi
 
           {
             echo "should_publish=${should_publish}"
             echo "release_type=${release_type}"
-            echo "changelog<<EOF"
-            echo "${changelog_content}"
-            echo "EOF"
           } >> "$GITHUB_OUTPUT"
 
   build:
@@ -113,13 +103,11 @@ jobs:
         id: changelog
         shell: bash
         run: |
-          changelog_content="${{ needs.prepare.outputs.changelog }}"
-          if [[ -z "${changelog_content}" ]]; then
-            changelog_content="$(cat CHANGELOG.md)"
-          fi
           {
             echo "content<<EOF"
-            echo "${changelog_content}"
+            echo "更新日志请前往 GitHub 仓库查看。"
+            echo
+            echo "Please check the GitHub repository for the changelog."
             echo "EOF"
           } >> "$GITHUB_OUTPUT"
 
