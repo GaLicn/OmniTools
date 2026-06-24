@@ -120,6 +120,11 @@ public class OmniVajraItem extends Item {
     }
 
     @Override
+    public boolean isCorrectToolForDrops(ItemStack stack, BlockState state) {
+        return state.requiresCorrectToolForDrops() || super.isCorrectToolForDrops(stack, state);
+    }
+
+    @Override
     public boolean canPerformAction(ItemStack stack, ToolAction toolAction) {
         return MY_ACTIONS.contains(toolAction) || super.canPerformAction(stack, toolAction);
     }
